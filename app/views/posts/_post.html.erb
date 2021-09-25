@@ -1,0 +1,22 @@
+<div class="card bg-light mb-3">
+    <div class="card-body">
+        <h4><%= link_to post.title, post, class: "text-black text-decoration-none" %></h4>
+
+        <div class="text-muted mb-2">
+            <em>Por <%= post.author %> em <%= I18n.l post.created_at, format: :long %></em>
+        </div>
+
+        <p>
+            <%= post.body.truncate(150) %>
+        </p>
+
+        <p class="text=muted">
+            <%= pluralize(post.comments.count, "Comentário") %>
+        </p>
+
+        <%= link_to "Artigo completo", post, class: "btn btn-secondary" %>
+        <%= link_to "Editar artigo", edit_post_path(post), class: "btn btn-secondary" %>
+        <%= link_to "Apagar", post, method: :delete, class: "btn btn-danger", data: { confirm: "Deseja realmente apagar o registro?\n(Esse processo é irreversível)"} %>
+
+    </div>
+</div>

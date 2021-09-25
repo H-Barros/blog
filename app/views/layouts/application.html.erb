@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Barros</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+  </head>
+
+  <body>
+    <div class="bg-danger text-white text-center mb-4 p-4">
+      <%= link_to root_path, class: "text-white text-decoration-none" do %>
+        <h1 class="display-5">Barros Blog</h1>
+      <% end %>
+      <p class="lead">Meu primeiro projeto feito no Rails <3</p>
+    </div>
+
+    <div class="container">
+      <% flash.each do |type, message| %>
+        <div class="alert alert-<%= type == "alert" ? "danger" : "success" %> alert-dismissible fade show" role="alert">
+          <%= message %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+
+      <div class="search mb-3">
+        <%= form_with url: search_posts_path, method: :get, local: true, class: "row g-1" do |form| %>
+          <div class="col-3 form-group offset-8">
+            <%= form.search_field :q, class: "form-control", value: params[:q], required: true, placeholder: "Busca" %>
+          </div>
+          <div class="col-1">
+            <%= form.submit "Buscar", class: "btn btn-secondary", data: { disable_with: "Buscando..." } %>
+          </div>
+        <% end %>
+      </div>
+
+      <%= yield %>
+    </div>
+
+    <footer class="mt-4 text-end bg-danger text-white p-4">
+        Feito com muita alegria e paciência em <%= Date.current.year %>.
+    </footer>
+  </body>
+</html>
